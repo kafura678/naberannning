@@ -1,3 +1,8 @@
 is_global = true
 build_property.RootNamespace = 
-build_property.ProjectDir = /Users/practice_gamemaking/Winter_GameJam2024/naberannning/NabeRunnig/
+build_property.ProjectDir = /Users/hw25a166/Documents/GitHub/naberannning/NabeRunnig/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 
