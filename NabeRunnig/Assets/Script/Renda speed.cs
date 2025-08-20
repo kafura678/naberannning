@@ -13,7 +13,7 @@ public class Rendaspeed : MonoBehaviour
     private float currentSpeed;
     public float pushcount = 0;
     private float lastInputTime;
-    private float inputInterval = 0.2f;　　//入力間隔(秒)
+    private float inputInterval = 0.2f;  //入力間隔(秒)
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +27,14 @@ public class Rendaspeed : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {//入力間隔をチェック
             pushcount++;
+            lastInputTime = Time.time;
         }
 
         //連打回数のリセット
-        /*if (pushcount > 0 && Time.time - lastInputTime >= inputInterval)
+        if (pushcount > 0 && Time.time - lastInputTime >= inputInterval)
         {
-            pushcount = 0;
-        }*/
+            pushcount--;
+        }
 
     }
 }

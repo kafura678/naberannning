@@ -1,15 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
-using System.Collections;
-using System.Collections.Generic;
 
 public class PlayerMove : MonoBehaviour
 {
-    public GameObject nabeObj;
-
     // パラメータ
     public float moveSpeed;           // 移動速度
+    private float moveSpeeds;
     public float gravity = -9.8f;        // 重力加速度
 
     //バッテリーのバー
@@ -24,17 +21,30 @@ public class PlayerMove : MonoBehaviour
 
     public float cameraX;
     public float sensitivity = 2.0f;
+    public float maxSpeed;
+    public float changeSpeed;
     public CharacterController controller;  // 移動に使うCharacterController
 
     // 演算用変数
     private Vector3 velocity;       // 加速度を保持する変数
     private bool isGrounded;        // 地面に着地しているかどうかのフラグ変数
+    [SerializeField] private Rendaspeed rendaspeed;
 
     // ゲーム中実行されるUpdate関数
     void Update()
     {
+        SpeedCon();
         Move();
-        BatteryBarControl();
+    }
+
+    private void SpeedCon()
+    {
+        if (moveSpeed <= maxSpeed)
+        {
+            float upSpeed = rendaspeed.pushcount;
+            moveSpeeds = moveSpeed + upSpeed / changeSpeed;
+        }
+
     }
 
     private void Move()
@@ -52,11 +62,10 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-
         float cameraX = Input.GetAxis("rightHorizontal") * sensitivity;
 
         // ローカル座標をワールド座標に変換して移動方向を計算
-        Vector3 moveDirection = transform.TransformDirection(new Vector3(h, 0, v)) * moveSpeed;
+        Vector3 moveDirection = transform.TransformDirection(new Vector3(h, 0, v)) * moveSpeeds;
 
         // 重力を加算
         velocity.y += gravity * Time.deltaTime;
@@ -65,7 +74,7 @@ public class PlayerMove : MonoBehaviour
         controller.Move((moveDirection + velocity) * Time.deltaTime);
 
         // Player（体）の回転（左右）
-        transform.Rotate(0, -cameraX, 0);
+        transform.Rotate(0, cameraX, 0);
     }
 
     private void BatteryBarControl()

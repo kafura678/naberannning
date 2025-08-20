@@ -356,7 +356,6 @@
 -analyzer:"/Applications/Unity/Hub/Editor/2022.3.60f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Script/GameManager.cs"
 "Assets/Script/PlayerMove.cs"
-"Assets/Script/umehara_PlayerCamera.cs"
 "Assets/Script/Renda speed.cs"
 "Assets/Script/UnityEventExample.cs"
 -langversion:9.0
