@@ -5,6 +5,10 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     [SerializeField] private GameObject goalText;
+    [SerializeField] private PlayerMove plyaermove;
+    [SerializeField] private GameManager gamemanager;
+    [SerializeField] private GameObject potts;
+    [SerializeField] private Transform spot;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,10 @@ public class Goal : MonoBehaviour
         if (other.CompareTag("pot"))
         {
             goalText.SetActive(true);
+            plyaermove.enabled = false;
+            gamemanager.enabled = false;
+            potts.transform.parent = null;
+            potts.transform.position = spot.transform.position + new Vector3(0, 0.2f, 0);
         }
     }
 }
