@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameObject nabeObj;
+
     // パラメータ
     public float moveSpeed;           // 移動速度
     public float gravity = -9.8f;        // 重力加速度
@@ -30,6 +34,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         Move();
+        BatteryBarControl();
     }
 
     private void Move()
@@ -47,7 +52,8 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        float cameraX = Input.GetAxis("Mouse X") * sensitivity;
+
+        float cameraX = Input.GetAxis("rightHorizontal") * sensitivity;
 
         // ローカル座標をワールド座標に変換して移動方向を計算
         Vector3 moveDirection = transform.TransformDirection(new Vector3(h, 0, v)) * moveSpeed;
@@ -59,7 +65,7 @@ public class PlayerMove : MonoBehaviour
         controller.Move((moveDirection + velocity) * Time.deltaTime);
 
         // Player（体）の回転（左右）
-        transform.Rotate(0, cameraX, 0);
+        transform.Rotate(0, -cameraX, 0);
     }
 
     private void BatteryBarControl()
