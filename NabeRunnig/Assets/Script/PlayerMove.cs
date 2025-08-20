@@ -1,10 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 public class PlayerMove : MonoBehaviour
 {
     // パラメータ
     public float moveSpeed;           // 移動速度
     public float gravity = -9.8f;        // 重力加速度
+
+    //バッテリーのバー
+    public Image batteryBar;
+
+    public GameObject powerSupply;
+
+    //メーター
+    public float batteryMeter;
+    //マックス
+    public float maxBatteryMeter;
 
     public float cameraX;
     public float sensitivity = 2.0f;
@@ -48,5 +60,19 @@ public class PlayerMove : MonoBehaviour
 
         // Player（体）の回転（左右）
         transform.Rotate(0, cameraX, 0);
+    }
+
+    private void BatteryBarControl()
+    {
+        batteryBar.fillAmount = batteryMeter / maxBatteryMeter;
+
+        if (batteryMeter <= 0)
+        {
+            powerSupply.GetComponent<Image>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        }
+        if (batteryMeter == maxBatteryMeter)
+        {
+            powerSupply.GetComponent<Image>().color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+        }
     }
 }
